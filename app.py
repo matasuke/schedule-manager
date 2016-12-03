@@ -16,6 +16,7 @@ import settings
 
 app = Flask(__name__)
 
+test = 1
 
 # get channel_secret and channel_access_token from your environment variable
 channel_secret = settings.CHANNEL_SECRET
@@ -34,7 +35,7 @@ handler = WebhookHandler(channel_secret)
 
 @app.route("/post", methods=['POST'])
 def hook():
-    print(request.json)
+    line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text='Hello World!'))
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -61,7 +62,8 @@ def message_text(event):
     
     #docomo dialogue api
     msg = event.message.text
-
+    
+    mid = event.source.userId
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=msg)
