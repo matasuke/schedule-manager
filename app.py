@@ -127,10 +127,9 @@ def message_text(event):
                 text='予定を入力しますか？',
                 actions=[
                     #URITemplateAction(
-                    PostbackTemplateAction(
+                    URITemplateAction(
                         label='入力する',
-                        data="Yes",
-                        #url="https://example.com/bot/images/item2.jpg"
+                        url="https://example.com/bot/images/item2.jpg"
                     )
                 ]
             )
