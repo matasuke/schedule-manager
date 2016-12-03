@@ -119,33 +119,27 @@ def message_text(event):
         )
 
     if "予定を入力する" == event.message.text:
-        
-        confirm_template = ConfirmTemplate(text='Do it?', actions=[
-            URITemplateAction(label='予定を入力する', url="https://iothack2016.herokuapp.com/inputpage/"),
-        ])
 
-        template_message = TemplateSendMessage(
-            alt_text='Confirm alt text', template=confirm_template)
-        line_bot_api.reply_message(event.reply_token, template_message)
 
-        ###
-        confirm_template_message = TemplateSendMessage(
+         
+        buttons_template_message = TemplateSendMessage(
             alt_text='この情報はスマートフォンからのみ観覧できます。',
-            template=ConfirmTemplate(
-                text='予定を入力しますか？',
+            template=ButtonsTemplate(
+                thumbnail_image_url='https://example.com/bot/images/item2.jpg',
+                title='予定を入力しますか？',
+                text='傘持てや！',
                 actions=[
                     URITemplateAction(
                         label='入力する',
-                        url="https://iothack2016.herokuapp.com/inputpage/"
+                        uri="https://iothack2016.herokuapp.com/inputpage/"
                     )
                 ]
             )
         )
-        ####
 
         line_bot_api.reply_message(
             event.reply_token,
-            confirm_template_message
+            buttons_template_message
         )
 
     #mid = event.source.userId
