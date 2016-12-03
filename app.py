@@ -131,10 +131,6 @@ def message_text(event):
                         label='入力する',
                         data="Yes",
                         #url="https://example.com/bot/images/item2.jpg"
-                    ),
-                    PostbackTemplateAction(
-                        label="キャンセル",
-                        data="No",
                     )
                 ]
             )
