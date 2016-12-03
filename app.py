@@ -24,6 +24,7 @@ from linebot.models import (
 import settings
 from connectDB import *
 from defTimes import *
+from sendmsg import * 
 from doco.client import Client
 from pymongo import MongoClient
 app = Flask(__name__)
@@ -66,10 +67,10 @@ def hook():
     #connect to database
     dbh, stmt = connectDB()
     sql = "select * from take where appointed_time like " + '"' + today_1 + "%" + '"' + ';'
-    print(sql)
     stmt.execute(sql)
     rows = stmt.fetchall()
     for row in rows:
+        print(row)
         message = SendMsg(row)         
         line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text=message))
 
