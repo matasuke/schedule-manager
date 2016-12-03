@@ -32,7 +32,7 @@ if channel_access_token is None:
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
-@app.route("/", method=['POST'])
+@app.route("/post", methods=['POST'])
 def hook():
     print(request.json)
 
