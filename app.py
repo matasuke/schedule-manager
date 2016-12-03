@@ -48,7 +48,7 @@ doco = Client(docomo_api_key, user=user)
 #post request to line bot server from ifttt, which is connected to mesh 
 @app.route("/post", methods=['POST'])
 def hook():
-    line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text='Hello World!'))
+    line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text='今日の予定です'))
 
 
 
