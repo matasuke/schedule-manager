@@ -56,8 +56,8 @@ handler = WebhookHandler(channel_secret)
 user = settings.user_config
 doco = Client(docomo_api_key, user=user)
 
-#counter
-counter = 0
+couter = 0
+
 
 #post request to line bot server from ifttt, which is connected to mesh 
 @app.route("/post", methods=['POST'])
