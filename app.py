@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import sys
+import datetime
 
 from flask import Flask, request, abort
 from linebot import (
@@ -22,7 +23,6 @@ from linebot.models import (
 
 import settings
 from connectDB import *
-
 from doco.client import Client
 from pymongo import MongoClient
 app = Flask(__name__)
@@ -54,12 +54,45 @@ user = settings.user_config
 doco = Client(docomo_api_key, user=user)
 
 
+#define time
+today = datetime.datetime.today()
+
+year = str(today.year)
+
+month = str(today.month)
+if len(month) == 1:
+    month = "0" + month
+
+day = str(today.day)
+if len(day) == 1:
+    day = "0" + day
+
+hour = str(today.hour)
+if len(hour) == 1:
+    hour = "0" + hour
+
+minuts = str(today.minute)
+if len(minuts) == 1:
+    minutes = "0" + minuts
+
+today_1 = year + "-" + month + "-" + day  
+print(today_1)
+
+
+
 #post request to line bot server from ifttt, which is connected to mesh 
 @app.route("/post", methods=['POST'])
 def hook():
+
     
     #connect to database
     dbh, stmt = connectDB()
+    sql = "select * from take where appointed_time like " + '"' + today_1 + "%" + '"' + ';'
+    stmt.execute(sql)
+    rows = stmt.fetchall()
+    for row in rows:
+        message = SendMsg(row)         
+        line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text=message))
 
 
 
@@ -112,7 +145,7 @@ def message_text(event):
     msg = event.message.text
     response = doco.send(utt=msg, apiname="Dialogue")
 
-    if "予定は？" in event.message.text:
+    if "今日の予定" in event.message.text:
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="今日はまだ予定ないよ")
@@ -127,7 +160,7 @@ def message_text(event):
             template=ButtonsTemplate(
                 thumbnail_image_url='https://example.com/bot/images/item2.jpg',
                 title='予定を入力しますか？',
-                text='傘持てや！',
+                text='マンコ!!!!',
                 actions=[
                     URITemplateAction(
                         label='入力する',
