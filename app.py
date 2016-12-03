@@ -113,7 +113,7 @@ def message_text(event):
     if "予定を入力する" == event.message.text:
         line_bot_api.reply_message(
             event.reply_token,
-            buttons_template_message)
+            buttons_template_message
         )
 
     #mid = event.source.userId
