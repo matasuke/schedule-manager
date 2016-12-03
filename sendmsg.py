@@ -2,10 +2,10 @@ from getStation import *
 
 
 def SendMsg(row):
-    appointed_time = row['appointed_time']
+    appointed_time = str(row['appointed_time'])[11:]
     brings = row['brings']
     place = row['place']
-    depart_time = row['depart_time']
+    depart_time = str(row['depart_time'])[11:]
     station = row['station']
 
     message1 = "本日の予定は以下の通りです"
