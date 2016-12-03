@@ -15,6 +15,6 @@ def SendMsg(row):
     message5 = "以下に目的地までのルートを記載します。"
     #message6 = Get_Station_info("所沢駅", "高田馬場駅", 20161221, 1655)
 
-    messages = message1 + "\n" + message2 + "\n" + message3 + "\n" + message4 + "\n" + message5 + "\n" + message6
+    messages = message1 + "\n" + message2 + "\n" + message3 + "\n" + message4 + "\n" + message5# + "\n" + message6
 
     return messages
