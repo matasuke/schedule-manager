@@ -27,7 +27,7 @@ def Get_Station_info(fro, to, when, time):
     
     #get station name
     dt = stations.find_all("dt")
-    soup2 = BeautifulSoup(str(dt), "lxml")
+    soup2 = BeautifulSoup(str(dt))
     urls = soup2.find_all("a")
 
     for i in urls:
