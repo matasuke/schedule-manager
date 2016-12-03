@@ -66,7 +66,7 @@ def hook():
     #weather information
  
     buttons_template_message = TemplateSendMessage(
-        alt_text='Buttons template',
+        alt_text='この情報はスマートフォンからのみ観覧できます。',
         template=ButtonsTemplate(
             thumbnail_image_url='https://example.com/bot/images/item2.jpg',
             title='雨が降るかも？',
@@ -120,22 +120,23 @@ def message_text(event):
 
     if "予定を入力する" == event.message.text:
         
-        ###
-        
-        ###
 
         confirm_template_message = TemplateSendMessage(
-            alt_text='Confirm template',
+            alt_text='この情報はスマートフォンからのみ観覧できます。',
             template=ConfirmTemplate(
                 text='予定を入力しますか？',
                 actions=[
-                    URITemplateAction(
+                    #URITemplateAction(
+                    PostbackTemplateAction(
                         label='入力する',
-                        url="https://example.com/bot/images/item2.jpg"
+                        data="Yes",
+                        text="test"
+                        #url="https://example.com/bot/images/item2.jpg"
                     ),
                     PostbackTemplateAction(
                         label="キャンセル",
-                        data="No"
+                        data="No",
+                        text="test"
                     )
                 ]
             )
