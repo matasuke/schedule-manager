@@ -61,7 +61,26 @@ def hook():
     #connect to database
     dbh, stmt = connectDB()
 
-    line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text='今日の予定です'))
+
+
+    #weather information
+ 
+    buttons_template_message = TemplateSendMessage(
+        alt_text='Buttons template',
+        template=ButtonsTemplate(
+            thumbnail_image_url='https://example.com/bot/images/item2.jpg',
+            title='雨が降るかも？',
+            text='傘持てや！',
+            actions=[
+                URITemplateAction(
+                    label='詳しく!',
+                    uri='http://weather.yahoo.co.jp/weather/jp/13/4410.html'
+                )
+            ]
+        )
+    )
+    
+    line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", buttons_template_message)
 
 
 
@@ -87,20 +106,6 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def message_text(event):
     
-    buttons_template_message = TemplateSendMessage(
-         alt_text='Buttons template',
-         template=ButtonsTemplate(
-            thumbnail_image_url='https://example.com/image.jpg',
-            title='入力フォーム',
-            text='Please select',
-            actions=[
-                URITemplateAction(
-                    label='Open URL',
-                    uri='http://example.com/'
-                )
-            ]
-        )
-    )
 
 
     #docomo dialogue api
@@ -114,9 +119,32 @@ def message_text(event):
         )
 
     if "予定を入力する" == event.message.text:
+        
+        ###
+        
+        ###
+
+        confirm_template_message = TemplateSendMessage(
+            alt_text='Confirm template',
+            template=ConfirmTemplate(
+                text='予定を入力しますか？',
+                actions=[
+                    URITemplateAction(
+                        label='入力する',
+                        url="https://example.com/bot/images/item2.jpg"
+                    ),
+                    PostbackTemplateAction(
+                        label="キャンセル",
+                        data="No"
+                    )
+                ]
+            )
+        )
+
+
         line_bot_api.reply_message(
             event.reply_token,
-            buttons_template_message
+            confirm_template_message
         )
 
     #mid = event.source.userId
