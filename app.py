@@ -126,10 +126,9 @@ def message_text(event):
             template=ConfirmTemplate(
                 text='予定を入力しますか？',
                 actions=[
-                    #URITemplateAction(
                     URITemplateAction(
                         label='入力する',
-                        url="https://example.com/bot/images/item2.jpg"
+                        url="https://iothack2016.herokuapp.com/inputpage/"
                     )
                 ]
             )
