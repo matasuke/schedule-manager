@@ -14,3 +14,4 @@ simplejson==3.10.0
 Werkzeug==0.11.11
 PyMySQL==0.7.9
 beautifulsoup4==4.4.1
+lxml==3.6.0
