@@ -13,19 +13,10 @@ from linebot.models import (
     MessageEvent, FollowEvent, TextMessage, TextSendMessage,
 )
 import settings
-import feedback
-import get_feedback 
-from doco.client import Client
-from pymongo import MongoClient
 
 
 app = Flask(__name__)
 
-#docomo conversation api key
-docomo_api_key = settings.DOCOMO_API_KEY
-if docomo_api_key is None:
-    print("DOCOMO_API_KEY not found")
-    sys.exit(1)
 
 # get channel_secret and channel_access_token from your environment variable
 channel_secret = settings.CHANNEL_SECRET
@@ -72,11 +63,10 @@ def message_text(event):
     
     #docomo dialogue api
     msg = event.message.text
-    response = doco.send(utt=msg, apiname="Dialogue")
 
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=response['utt'])
+        TextSendMessage(text=msg)
     )
 
 
