@@ -34,7 +34,7 @@ handler = WebhookHandler(channel_secret)
 
 @app.route("/post", methods=['POST'])
 def hook():
-    print(request.json)
+    #print(request.json)
 
 @app.route("/callback", methods=['POST'])
 def callback():
