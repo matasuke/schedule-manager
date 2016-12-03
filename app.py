@@ -69,6 +69,8 @@ def hook():
     #get times
     times, today_1 = getNowTimes()
     
+
+    # tell wether or not you come back home
     if counter % 2 == 0:
         #connect to database
         dbh, stmt = connectDB()
@@ -97,9 +99,10 @@ def hook():
         )
     
         line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", buttons_template_message)
-    
+
+
     else:
-        line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text="おかえりマンコ!!")
+        line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text="おかえりマンコ！"))
 
 
 @app.route("/callback", methods=['POST'])
