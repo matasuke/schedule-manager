@@ -56,53 +56,45 @@ handler = WebhookHandler(channel_secret)
 user = settings.user_config
 doco = Client(docomo_api_key, user=user)
 
-couter = 0
 
 
 #post request to line bot server from ifttt, which is connected to mesh 
 @app.route("/post", methods=['POST'])
 def hook():
 
-    #counter
-    counter += 1
-
     #get times
     times, today_1 = getNowTimes()
     
+    #connect to database
+    dbh, stmt = connectDB()
+    sql = "select * from take where appointed_time like " + '"' + today_1 + "%" + '"' + ';'
+    stmt.execute(sql)
+    rows = stmt.fetchall()
+    for row in rows:
+        message = SendMsg(row)         
+        line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text=message))
 
-    # tell wether or not you come back home
-    if counter % 2 == 0:
-        #connect to database
-        dbh, stmt = connectDB()
-        sql = "select * from take where appointed_time like " + '"' + today_1 + "%" + '"' + ';'
-        stmt.execute(sql)
-        rows = stmt.fetchall()
-        for row in rows:
-            message = SendMsg(row)         
-            line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text=message))
 
-        #weather information
+
+    #weather information
  
-        buttons_template_message = TemplateSendMessage(
-            alt_text='この情報はスマートフォンからのみ観覧できます。',
-            template=ButtonsTemplate(
-                thumbnail_image_url='https://example.com/bot/images/item2.jpg',
-                title='雨が降るかも？',
-                text='傘持てや！',
-                actions=[
-                    URITemplateAction(
-                        label='詳しく!',
-                        uri='http://weather.yahoo.co.jp/weather/jp/13/4410.html'
-                    )
-                ]
-            )
+    buttons_template_message = TemplateSendMessage(
+        alt_text='この情報はスマートフォンからのみ観覧できます。',
+        template=ButtonsTemplate(
+            thumbnail_image_url='https://example.com/bot/images/item2.jpg',
+            title='雨が降るかも？',
+            text='傘持てや！',
+            actions=[
+                URITemplateAction(
+                    label='詳しく!',
+                    uri='http://weather.yahoo.co.jp/weather/jp/13/4410.html'
+                )
+            ]
         )
+    )
     
-        line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", buttons_template_message)
+    line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", buttons_template_message)
 
-
-    else:
-        line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text="おかえりマンコ！"))
 
 
 @app.route("/callback", methods=['POST'])
