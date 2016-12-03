@@ -51,12 +51,7 @@ doco = Client(docomo_api_key, user=user)
 def hook():
     
     #connect to database
-    db = mysql.connector.connect(
-         host='us-cdbr-iron-east-04.cleardb.net',
-         db="heroku_a531a92ab76dcee",
-         user="be5ab077d28f25",
-         password="7f1836ca"
-    )
+    dbh, stmt = connectDB()
 
     line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text='今日の予定です'))
 
