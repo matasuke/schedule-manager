@@ -23,6 +23,7 @@ from linebot.models import (
 
 import settings
 from connectDB import *
+from defTimes import *
 from doco.client import Client
 from pymongo import MongoClient
 app = Flask(__name__)
@@ -54,40 +55,18 @@ user = settings.user_config
 doco = Client(docomo_api_key, user=user)
 
 
-#define time
-today = datetime.datetime.today()
-
-year = str(today.year)
-
-month = str(today.month)
-if len(month) == 1:
-    month = "0" + month
-
-day = str(today.day)
-if len(day) == 1:
-    day = "0" + day
-
-hour = str(today.hour)
-if len(hour) == 1:
-    hour = "0" + hour
-
-minuts = str(today.minute)
-if len(minuts) == 1:
-    minutes = "0" + minuts
-
-today_1 = year + "-" + month + "-" + day  
-print(today_1)
-
-
 
 #post request to line bot server from ifttt, which is connected to mesh 
 @app.route("/post", methods=['POST'])
 def hook():
 
+    #get times
+    times, today_1 = getNowTimes()
     
     #connect to database
     dbh, stmt = connectDB()
     sql = "select * from take where appointed_time like " + '"' + today_1 + "%" + '"' + ';'
+    print(sql)
     stmt.execute(sql)
     rows = stmt.fetchall()
     for row in rows:
