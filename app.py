@@ -14,7 +14,6 @@ from linebot.models import (
 )
 import settings
 
-
 app = Flask(__name__)
 
 
@@ -32,10 +31,6 @@ if channel_access_token is None:
 #process line api keys
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
-
-#process docomo api key
-user = settings.user_config
-doco = Client(docomo_api_key, user=user)
 
 
 @app.route("/callback", methods=['POST'])
