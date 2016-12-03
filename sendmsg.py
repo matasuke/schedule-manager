@@ -10,7 +10,7 @@ def SendMsg(row):
 
     message1 = "本日の予定は以下の通りです"
     message2 = place + "にて" + appointed_time[:2] + "時" + appointed_time[3:5]+ "分から用事があります。"
-    message3 = "出発予定時刻は" + depart_time + "です"
+    message3 = "出発予定時刻は" + depart_time[:2]+ "時" + depart_time[3:5] + "分です"
     message4 = "持ち物は" + brings + "です。"
     message5 = "以下に目的地までのルートを記載します。"
     #message6 = Get_Station_info("所沢駅", "高田馬場駅", 20161221, 1655)
