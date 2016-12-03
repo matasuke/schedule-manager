@@ -16,7 +16,6 @@ import settings
 
 from doco.client import Client
 from pymongo import MongoClient
-
 app = Flask(__name__)
 
 
@@ -84,6 +83,7 @@ def message_text(event):
             event.reply_token,
             TextSendMessage(text="今日はまだ予定ないよ")
         )
+
     #mid = event.source.userId
     line_bot_api.reply_message(
         event.reply_token,
