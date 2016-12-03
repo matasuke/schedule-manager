@@ -63,7 +63,7 @@ def message_text(event):
     #docomo dialogue api
     msg = event.message.text
     
-    mid = event.source.userId
+    #mid = event.source.userId
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=msg)
