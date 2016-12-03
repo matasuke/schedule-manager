@@ -14,5 +14,8 @@ DOCOMO_API_KEY="785964692e7965396f434f4c616959504378645573477838684b533170736c38
 #bot character
 user_config = {'nickname':'千歳', 'nickname_y':'チトセ', 'sex':'女', 'bloodtype':'B', 'birthd    ateY':'1996', 'birthdateM':12, 'birthdateD':15, 'age':20, 'constellations':'射手座', 'plac    e':'東京'}
 
-# mong DB
-DB_URI = "mongodb://klab:0nsayken9@ds143717.mlab.com:43717/comutrain"
+#db
+user = "be5ab077d28f25"
+password = "7f1836ca"
+host = "us-cdbr-iron-east-04.cleardb.net"
+db="heroku_a531a92ab76dcee"

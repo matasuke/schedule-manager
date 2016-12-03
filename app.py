@@ -13,7 +13,8 @@ from linebot.models import (
     MessageEvent, FollowEvent, TextMessage, TextSendMessage,
 )
 import settings
-
+from connectDB import *
+]
 from doco.client import Client
 from pymongo import MongoClient
 app = Flask(__name__)
@@ -48,6 +49,15 @@ doco = Client(docomo_api_key, user=user)
 #post request to line bot server from ifttt, which is connected to mesh 
 @app.route("/post", methods=['POST'])
 def hook():
+    
+    #connect to database
+    db = mysql.connector.connect(
+         host='us-cdbr-iron-east-04.cleardb.net',
+         db="heroku_a531a92ab76dcee",
+         user="be5ab077d28f25",
+         password="7f1836ca"
+    )
+
     line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text='今日の予定です'))
 
 
@@ -74,6 +84,22 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def message_text(event):
     
+    buttons_template_message = TemplateSendMessage(
+         alt_text='Buttons template',
+         template=ButtonsTemplate(
+            thumbnail_image_url='https://example.com/image.jpg',
+            title='入力フォーム',
+            text='Please select',
+            actions=[
+                URITemplateAction(
+                    label='Open URL',
+                    uri='http://example.com/'
+                )
+            ]
+        )
+    )
+
+
     #docomo dialogue api
     msg = event.message.text
     response = doco.send(utt=msg, apiname="Dialogue")
@@ -82,6 +108,12 @@ def message_text(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text="今日はまだ予定ないよ")
+        )
+
+    if "予定を入力する" == event.message.text:
+        line_bot_api.reply_message(
+            event.reply_token,
+            buttons_template_message)
         )
 
     #mid = event.source.userId
