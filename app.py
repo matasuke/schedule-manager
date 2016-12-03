@@ -14,9 +14,17 @@ from linebot.models import (
 )
 import settings
 
+from doco.client import Client
+from pymongo import MongoClient
+
 app = Flask(__name__)
 
-test = 1
+
+#docomo conversation api key
+docomo_api_key = settings.DOCOMO_API_KEY
+if docomo_api_key is None:
+    print("DOCOMO_API_KEY not found")
+    sys.exit(1)
 
 # get channel_secret and channel_access_token from your environment variable
 channel_secret = settings.CHANNEL_SECRET
@@ -33,9 +41,17 @@ if channel_access_token is None:
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
+#process docomo api key
+user = settings.user_config
+doco = Client(docomo_api_key, user=user)
+
+
+#post request to line bot server from ifttt, which is connected to mesh 
 @app.route("/post", methods=['POST'])
 def hook():
     line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text='Hello World!'))
+
+
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -56,17 +72,22 @@ def callback():
 
 
 
-
 @handler.add(MessageEvent, message=TextMessage)
 def message_text(event):
     
     #docomo dialogue api
     msg = event.message.text
-    
+    response = doco.send(utt=msg, apiname="Dialogue")
+
+    if "予定は？" in event.message.text:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="今日はまだ予定ないよ")
+        )
     #mid = event.source.userId
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=msg)
+        TextSendMessage(text=response['utt'])
     )
 
 
