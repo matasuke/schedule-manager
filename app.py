@@ -120,7 +120,15 @@ def message_text(event):
 
     if "予定を入力する" == event.message.text:
         
+        confirm_template = ConfirmTemplate(text='Do it?', actions=[
+            URITemplateAction(label='予定を入力する', url="https://iothack2016.herokuapp.com/inputpage/"),
+        ])
 
+        template_message = TemplateSendMessage(
+            alt_text='Confirm alt text', template=confirm_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+
+        ###
         confirm_template_message = TemplateSendMessage(
             alt_text='この情報はスマートフォンからのみ観覧できます。',
             template=ConfirmTemplate(
@@ -133,7 +141,7 @@ def message_text(event):
                 ]
             )
         )
-
+        ####
 
         line_bot_api.reply_message(
             event.reply_token,
