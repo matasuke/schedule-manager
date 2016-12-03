@@ -14,7 +14,7 @@ from linebot.models import (
 )
 import settings
 from connectDB import *
-]
+
 from doco.client import Client
 from pymongo import MongoClient
 app = Flask(__name__)
