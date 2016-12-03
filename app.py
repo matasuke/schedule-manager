@@ -10,7 +10,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, FollowEvent, TextMessage, TextSendMessage,
+    MessageEvent, FollowEvent, TextMessage, TextSendMessage, TemplateSendMessage
 )
 import settings
 from connectDB import *
