@@ -21,7 +21,7 @@ def Get_Station_info(fro, to, when, time):
     URL_BASE = "http://transit.yahoo.co.jp/search/result?flatlon=&from=" + str(fro) + "&tlatlon=&to=" + str(to) + "&via=&via=&via=&y=" + str(year) + "&m=" + str(month) + "&d=" + str(day) + "&hh=" + str(hour) + "&m2=" + str(minit2) + "&m1=" + str(minit1) + "&type=1&ticket=ic&al=1&shin=1&ex=1&hb=1&lb=1&sr=1&s=0&expkind=1&ws=3"
 
     r = requests.get(URL_BASE)
-    soup = BeautifulSoup(r.content, "lxml")
+    soup = BeautifulSoup(r.content)
 
     stations = soup.find(id="route01").find(class_="routeDetail")
     
