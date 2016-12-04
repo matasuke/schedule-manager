@@ -147,7 +147,7 @@ def message_text(event):
                 actions=[
                     URITemplateAction(
                         label='入力する',
-                        uri="https://lastiothack.herokuapp.com/inputpage/"
+                        uri="https://lastiothack.herokuapp.com/"
                     )
                 ]
             )
