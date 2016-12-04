@@ -134,7 +134,7 @@ def message_text(event):
             TextSendMessage(text="今日はまだ予定ないよ")
         )
 
-    if "予定を入力する" == event.message.text:
+    if "予定を入力" == event.message.text:
 
 
          
