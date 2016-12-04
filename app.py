@@ -63,7 +63,7 @@ doco = Client(docomo_api_key, user=user)
 while 1:
 
     time.sleep(10.0) 
-    r = requests.get(HEART_BEAT).json()
+    r = requests.get(settings.HEART_BEAT).json()
     print(r['value'])
 
 #post request to line bot server from ifttt, which is connected to mesh 
