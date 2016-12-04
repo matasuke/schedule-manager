@@ -63,19 +63,6 @@ doco = Client(docomo_api_key, user=user)
 @app.route("/post", methods=['POST'])
 def hook():
 
-    #get times
-    times, today_1 = getNowTimes()
-    
-    #connect to database
-    dbh, stmt = connectDB()
-    sql = "select * from take where appointed_time like " + '"' + today_1 + "%" + '"' + ';'
-    stmt.execute(sql)
-    rows = stmt.fetchall()
-    for row in rows:
-        message = SendMsg(row)         
-        line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text=message))
-
-
     #weather information
  
     buttons_template_message = TemplateSendMessage(
@@ -94,6 +81,20 @@ def hook():
     )
     
     line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", buttons_template_message)
+
+    time.sleep(1.0)
+
+    #get times
+    times, today_1 = getNowTimes()
+    
+    #connect to database
+    dbh, stmt = connectDB()
+    sql = "select * from take where appointed_time like " + '"' + today_1 + "%" + '"' + ';'
+    stmt.execute(sql)
+    rows = stmt.fetchall()
+    for row in rows:
+        message = SendMsg(row)         
+        line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text=message))
 
 
 
@@ -139,12 +140,12 @@ def message_text(event):
             alt_text='この情報はスマートフォンからのみ観覧できます。',
             template=ButtonsTemplate(
                 thumbnail_image_url='https://example.com/bot/images/item2.jpg',
-                title='予定を入力しますか？',
-                text='マンコ!!!!',
+                title='予定を追加？',
+                text='新しい予定を入力しますか？',
                 actions=[
                     URITemplateAction(
                         label='入力する',
-                        uri="https://iothack2016.herokuapp.com/inputpage/"
+                        uri="https://lastiothack.herokuapp.com/inputpage/"
                     )
                 ]
             )
