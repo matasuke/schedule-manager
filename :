@@ -71,6 +71,7 @@ def hook():
     stmt.execute(sql)
     rows = stmt.fetchall()
     for row in rows:
+        print(message)
         message = SendMsg(row)         
         line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text=message))
 
