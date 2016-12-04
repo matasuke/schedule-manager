@@ -22,3 +22,4 @@ db="heroku_a531a92ab76dcee"
 
 #Heartbeat
 HEART_BEAT = "http://104.199.229.171/"
+

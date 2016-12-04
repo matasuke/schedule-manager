@@ -65,12 +65,13 @@ def hook():
 
     #weather information
  
+    r = requests.get(HEART_BEAT + "/weather")
     buttons_template_message = TemplateSendMessage(
         alt_text='この情報はスマートフォンからのみ観覧できます。',
         template=ButtonsTemplate(
             thumbnail_image_url='https://example.com/bot/images/item2.jpg',
-            title='雨が降るかも？',
-            text='傘持てや！',
+            title='今日の天気',
+            text='',
             actions=[
                 URITemplateAction(
                     label='詳しく!',
