@@ -9,7 +9,7 @@ line-bot-sdk==1.0.2
 MarkupSafe==0.23
 mod-pywebsocket==0.7.9
 pymongo==3.3.1
-requests==2.11.1
+requests==2.9.1
 simplejson==3.10.0
 Werkzeug==0.11.11
 PyMySQL==0.7.9
