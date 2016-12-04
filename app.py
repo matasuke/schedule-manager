@@ -73,7 +73,7 @@ def hook():
         template=ButtonsTemplate(
             thumbnail_image_url='https://example.com/bot/images/item2.jpg',
             title='天気',
-            text=contents,
+            text="test",
             actions=[
                 URITemplateAction(
                     label='詳しく!',
