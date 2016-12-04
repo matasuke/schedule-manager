@@ -65,7 +65,7 @@ def hook():
 
     #weather information
  
-    r = requests.get(HEART_BEAT + "/weather")
+    #r = requests.get(HEART_BEAT + "/weather")
     buttons_template_message = TemplateSendMessage(
         alt_text='この情報はスマートフォンからのみ観覧できます。',
         template=ButtonsTemplate(
