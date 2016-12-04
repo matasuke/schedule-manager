@@ -23,7 +23,7 @@ def Get_Station_info(fro, to, when, time):
     r = requests.get(URL_BASE)
     soup = BeautifulSoup(r.content, "lxml")
 
-    stations = soup.find(id="route01").find(class_="routeDetail")
+    stations = soup.find(class_="routeDetail")
     
     #get station name
     dt = stations.find_all("dt")
