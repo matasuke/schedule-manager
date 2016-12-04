@@ -72,7 +72,7 @@ def hook():
         alt_text='この情報はスマートフォンからのみ観覧できます。',
         template=ButtonsTemplate(
             thumbnail_image_url='http://blogs.c.yimg.jp/res/blog-c8-47/yokozuti/folder/498914/85/17505585/img_0?1377843496'
-            title='天気',
+            title="天気",
             text=contents,
             actions=[
                 URITemplateAction(
