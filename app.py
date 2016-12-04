@@ -71,7 +71,8 @@ def hook():
     buttons_template_message = TemplateSendMessage(
         alt_text='この情報はスマートフォンからのみ観覧できます。',
         template=ButtonsTemplate(
-            text= contents,
+            title='天気予報',
+            text= "test",
             actions=[
                 URITemplateAction(
                     label='詳しく!',
