@@ -2,6 +2,8 @@
 import os
 import sys
 import datetime
+import time
+import requests
 
 from flask import Flask, request, abort
 from linebot import (
@@ -58,6 +60,12 @@ doco = Client(docomo_api_key, user=user)
 
 
 
+while 1:
+
+    time.sleep(10.0) 
+    r = requests.get(HEART_BEAT).json()
+    print(r['value'])
+
 #post request to line bot server from ifttt, which is connected to mesh 
 @app.route("/post", methods=['POST'])
 def hook():
@@ -73,7 +81,6 @@ def hook():
     for row in rows:
         message = SendMsg(row)         
         line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text=message))
-
 
 
     #weather information

@@ -19,3 +19,6 @@ user = "be5ab077d28f25"
 password = "7f1836ca"
 host = "us-cdbr-iron-east-04.cleardb.net"
 db="heroku_a531a92ab76dcee"
+
+#Heartbeat
+HEART_BEAT = "http://104.199.229.171/"
