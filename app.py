@@ -71,9 +71,7 @@ def hook():
     buttons_template_message = TemplateSendMessage(
         alt_text='この情報はスマートフォンからのみ観覧できます。',
         template=ButtonsTemplate(
-            thumbnail_image_url='https://example.com/bot/images/item2.jpg',
-            title='天気',
-            text="test",
+            text= "天気予報" + contents,
             actions=[
                 URITemplateAction(
                     label='詳しく!',
