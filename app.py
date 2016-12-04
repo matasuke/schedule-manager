@@ -72,7 +72,7 @@ def hook():
         alt_text='この情報はスマートフォンからのみ観覧できます。',
         template=ButtonsTemplate(
             title='天気予報',
-            text= contents[285:],
+            text= contents[285:319],
             actions=[
                 URITemplateAction(
                     label='詳しく!',
