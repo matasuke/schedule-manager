@@ -86,17 +86,16 @@ def hook():
     
    # line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", buttons_template_message)
 
-    #get times
+    #get now time
     todayHM, todayYMD = getNowTimes()
     
     #connect to database
     db = usePSQL(settings.host, settings.db, settings.user, settings.password)
-
-    result = db.getAllAppointments(todayHM, todayYMD)
-    for row in result:
-        message = SendMsg(row, todayHM)      
-        line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text=message))
-
+    
+    #fetch datas
+    result = db.getAllAppointment(todayHM, todayYMD)
+    message = sendAllMsg(result, today)    
+    line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text=message))
 
 
 @app.route("/callback", methods=['POST'])
