@@ -120,11 +120,12 @@ def callback():
 def message_text(event):
     
 
-    #docomo dialogue api
     msg = event.message.text
+    
+    #docomo dialogue api
     response = doco.send(utt=msg, apiname="Dialogue")
 
-    if "今日の予定" in event.message.text:
+    if "今日の予定" in msg:
         todayHM, todayYMD = getNowTimes()
         db = usePSQL(settings.host, settings.db, settings.user, settings.password)
         appointments = db.getAllTodaysAppointments(todayYMD)
@@ -155,30 +156,30 @@ def message_text(event):
         )
         
 
-    #mid = event.source.userId
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=response['utt'])
-    )
-
     if "予定を削除" in msg:
 
         message = "どの予定を削除しますか？\n'1番の予定を削除'のように入力してください\n\n"
         db = usePSQL(settings.host, settings.db, settings.user, settings.password)
         results = sendList(db.getAllDaysAppointments())
 
-        #message += results
+        message += results
         
         line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=message)
-                )
+            event.reply_token,
+            TextSendMessage(text=message)
+        )                
 
     if "番の予定を削除" in msg:
         num = msg[0]
         db = usePSQL(settings.host, settings.db, settings.user, settings.password)
         db.delAppointment(num)
 
+
+    #mid = event.source.userId
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=response['utt'])
+    )
 
 # it starts when user follow this bot
 @handler.add(FollowEvent)
