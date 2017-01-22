@@ -160,6 +160,11 @@ def message_text(event):
         db = usePSQL(settings.host, settings.db, settings.user, settings.password)
         db.delAppointment(num)
 
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="予定を削除しました。")
+        )
+
 
     elif "予定を削除" in msg:
 
