@@ -6,7 +6,6 @@ import time
 import requests
 import psycopg2
 
-
 from flask import Flask, request, abort
 from linebot import (
     LineBotApi, WebhookHandler
@@ -31,7 +30,7 @@ from defTimes import *
 from sendmsg import * 
 
 from doco.client import Client
-from pymongo import MongoClient
+
 app = Flask(__name__)
 
 
