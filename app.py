@@ -163,7 +163,7 @@ def message_text(event):
 
     elif "予定を削除" in msg:
 
-        message = "どの予定を削除しますか？\n'1番の予定を削除'のように入力してください\n\n"
+        message = "どの予定を削除しますか？\n'予定1'のように入力してください\n\n"
         db = usePSQL(settings.host, settings.db, settings.user, settings.password)
         results = sendList(db.getAllDaysAppointments())
 
