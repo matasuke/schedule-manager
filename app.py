@@ -156,7 +156,7 @@ def message_text(event):
         )
         
     elif "予定" in msg and len(msg) == 3:
-        num = msg[0]
+        num = msg[2]
         db = usePSQL(settings.host, settings.db, settings.user, settings.password)
         db.delAppointment(num)
 
