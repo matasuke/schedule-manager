@@ -47,7 +47,7 @@ class usePSQL:
 
         return result
 
-    def updateAppointments(self, results):
+    def updateAppointment(self, results):
         place = results[0]
         day = results[1]
         depart_time = results[2]
@@ -59,7 +59,31 @@ class usePSQL:
         if day == "今日":
             day = todayYMD
 
-        sql = "insert into appointments values(" + place + "," + day + "," + depart_time + "," + appointed_time + "," + brings + ")"
+        sql = "insert into appointments values('" + place +"' , '" + day + "' , '" + depart_time + "' , '" + appointed_time + "' , '" + brings + "')"
+
+        self.cursor.execute(sql)
+        self.connector.commit()
+
+    def getAllDaysAppointments(self):
+        sql = "select * from appointments"
+        self.cursor.execute(sql)
+        results = self.cursor.fetchall()
+
+        return results
+
+    def delAppointment(num):
+        result = getAllDaysAppointments()
+
+        n = int(num) - 1
+
+        delData = result[n]
+        place = delData[0]
+        day = delData[1]
+        depart_time = delData[2]
+        appointed_time = delData[3]
+        brings = delData[4]
+
+        sql = "delete from appointments where place = '" + place + "' , '" + day + "' , '" + depart_time + "' , '" + appointed_time + "' , '" + brings + "'"
 
         self.cursor.execute(sql)
         self.connector.commit()

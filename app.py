@@ -138,7 +138,7 @@ def message_text(event):
         )
 
     if "予定を入力" in  msg:
-        message = "先頭に'予定'と記載の上，以下の順で予定を入力してください!\n\n場所\n日付(e.g: 2017-01-22)\n出発時間(e.g:14:00)\n集合時間(e.g:15:00)\n持ち物" 
+        message = "先頭に'予定'と記載の上，以下の順で予定を入力してください!\n\n場所(e.g:所沢駅)\n日付(e.g: 2017-01-22)\n出発時間(e.g:14:00)\n集合時間(e.g:15:00)\n持ち物(e.g:宿題)" 
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=message)
@@ -147,7 +147,7 @@ def message_text(event):
     if ("予定" == msg[:2]) and (len(msg.split("\n")[1:]) == 5):
         results = msg.split("\n")[1:]
         db = usePSQL(settings.host, settings.db, settings.user, settings.password)
-        db.updateAppointments(results)
+        db.updateAppointment(results)
 
         line_bot_api.reply_message(
             event.reply_token,
@@ -161,6 +161,22 @@ def message_text(event):
         TextSendMessage(text=response['utt'])
     )
 
+    if "予定を削除" in msg:
+
+        message = "どの予定を削除しますか？\n'1番の予定を削除'のように入力してください"
+        db = usePSQL(settings.host, settings.db, settings.user, settings.password)
+        results = db.getAllDaysAppointments()
+        message += "\n\n" + sendList(results)
+        
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=message)
+        )
+
+    if "番の予定を削除" in msg:
+        num = msg[0]
+        db = usePSQL(settings.host, settings.db, settings.user, settings.password)
+        db.delAppointment(num)
 
 
 # it starts when user follow this bot
