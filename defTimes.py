@@ -2,8 +2,6 @@ import datetime
 
 def getNowTimes():
 
-    times = []
-
     today = datetime.datetime.today()
 
     year = str(today.year)
@@ -24,12 +22,7 @@ def getNowTimes():
     if len(minuts) == 1:
         minutes = "0" + minuts
 
-    times.append(year)
-    times.append(month)
-    times.append(day)
-    times.append(hour)
-    times.append(minuts)
-
+    todayHM = hour + ":" + minuts + ":00"
     todayYMD = year + "-" + month + "-" + day
 
-    return times, todayYMD
+    return todayHM, todayYMD

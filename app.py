@@ -4,6 +4,8 @@ import sys
 import datetime
 import time
 import requests
+import psycopg2
+
 
 from flask import Flask, request, abort
 from linebot import (
@@ -85,16 +87,15 @@ def hook():
    # line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", buttons_template_message)
 
     #get times
-    #times, today_1 = getNowTimes()
+    todayHM, todayYMD = getNowTimes()
     
     #connect to database
-    dbh, stmt = connectDB()
-    #sql = "select * from take where appointed_time like " + '"' + today_1 + "%" + '"' + ';'
-    #stmt.execute(sql)
-    #rows = stmt.fetchall()
-    #for row in rows:
-    #    message = SendMsg(row)         
-    line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text="まんこ"))
+    db = usePSQL(settings.host, settings.db, settings.user, settings.password)
+
+    result = db.getAllAppointments(todayHM, todayYMD)
+    for row in result:
+        message = SendMsg(row, todayHM)      
+        line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text=message))
 
 
 

@@ -14,12 +14,11 @@ DOCOMO_API_KEY="785964692e7965396f434f4c616959504378645573477838684b533170736c38
 #bot character
 user_config = {'nickname':'千歳', 'nickname_y':'チトセ', 'sex':'女', 'bloodtype':'B', 'birthd    ateY':'1996', 'birthdateM':12, 'birthdateD':15, 'age':20, 'constellations':'射手座', 'plac    e':'東京'}
 
-#db
-user = "be5ab077d28f25"
-password = "7f1836ca"
-host = "us-cdbr-iron-east-04.cleardb.net"
-db="heroku_a531a92ab76dcee"
 
-#Heartbeat
-HEART_BEAT = "http://104.199.229.171/"
+#postgreSQL
+user = "vryrmjmcxdznft"
+password = "21c0a75ecc38e0a0fb200f07d5930ca95054669ec6cb0e4f0573f73b86e4f77b"
+host = "ec2-184-72-252-69.compute-1.amazonaws.com"
+db="d4nd2cfkq0rvt6"
+
 
