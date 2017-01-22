@@ -167,7 +167,7 @@ def message_text(event):
         db = usePSQL(settings.host, settings.db, settings.user, settings.password)
         results = sendList(db.getAllDaysAppointments())
 
-        message += results
+        #message += results
         
         line_bot_api.reply_message(
             event.reply_token,
