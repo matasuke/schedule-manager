@@ -170,9 +170,9 @@ def message_text(event):
         #message += results
         
         line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=message)
-        )
+                event.reply_token,
+                TextSendMessage(text=message)
+                )
 
     if "番の予定を削除" in msg:
         num = msg[0]
