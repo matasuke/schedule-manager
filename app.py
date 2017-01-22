@@ -85,16 +85,16 @@ def hook():
    # line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", buttons_template_message)
 
     #get times
-    times, today_1 = getNowTimes()
+    #times, today_1 = getNowTimes()
     
     #connect to database
-    dbh, stmt = connectDB()
-    sql = "select * from take where appointed_time like " + '"' + today_1 + "%" + '"' + ';'
-    stmt.execute(sql)
-    rows = stmt.fetchall()
-    for row in rows:
-        message = SendMsg(row)         
-        line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text=message))
+    #dbh, stmt = connectDB()
+    #sql = "select * from take where appointed_time like " + '"' + today_1 + "%" + '"' + ';'
+    #stmt.execute(sql)
+    #rows = stmt.fetchall()
+    #for row in rows:
+    #    message = SendMsg(row)         
+        line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text="まんこ"))
 
 
 
