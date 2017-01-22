@@ -60,7 +60,7 @@ doco = Client(docomo_api_key, user=user)
 
 
 #post request to line bot server from ifttt, which is connected to mesh 
-@app.route("/post", methods=['POST'])
+@app.route("/get", methods=['GET'])
 def hook():
 
     #weather information
