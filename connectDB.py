@@ -33,9 +33,16 @@ class usePSQL:
         self.cursor.close()
         self.connector.close()
 
-    def getAllAppointment(self, todayHM, todayYMD):
+    def getAllAppointments(self, todayHM, todayYMD):
         sql = "select * from appointments where day = " + "'" + todayYMD + "'" + "and appointed_time >" + "'" +  todayHM + "'"
         self.cursor.execute(sql)
         result = self.cursor.fetchall()
         
+        return result
+
+    def getAllTodaysAppointments(self, todayYMD):
+        sql = "select * from appointments where day =" + "'" + todayYMD + "'"
+        self.cursor.execute(sql)
+        result = self.cursor.fetchall()
+
         return result

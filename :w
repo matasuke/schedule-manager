@@ -120,6 +120,7 @@ def callback():
 def message_text(event):
     
 
+
     #docomo dialogue api
     msg = event.message.text
     response = doco.send(utt=msg, apiname="Dialogue")
@@ -127,13 +128,9 @@ def message_text(event):
     if "今日の予定" in event.message.text:
         todayHM, todayYMD = getNowTimes()
         appointments = getAllTodaysAppointments(todayYMD)
-        if appointments == []:
-            message = "今日の予定はまだないよ。"
-        else:
-            message = sendAllMsg(appointments, todayHM)
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=message)
+            TextSendMessage(text="今日はまだ予定ないよ")
         )
 
     if "予定を入力" in  event.message.text:
