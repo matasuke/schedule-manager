@@ -71,7 +71,7 @@ class usePSQL:
 
         return results
 
-    def delAppointment(num):
+    def delAppointment(self, num):
         result = getAllDaysAppointments()
 
         n = int(num) - 1

@@ -155,7 +155,7 @@ def message_text(event):
             TextSendMessage(text="予定を更新しました")
         )
         
-    elif "番の予定を削除" in msg:
+    elif "予定" in msg and len(msg) == 3:
         num = msg[0]
         db = usePSQL(settings.host, settings.db, settings.user, settings.password)
         db.delAppointment(num)
