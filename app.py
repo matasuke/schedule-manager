@@ -65,7 +65,6 @@ doco = Client(docomo_api_key, user=user)
 @app.route("/post", methods=['POST'])
 def hook():
     
-    line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text="まんちょ"))
     #weather information
  
     #r = requests.get(settings.HEART_BEAT + "weather")
