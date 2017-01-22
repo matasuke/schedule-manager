@@ -88,7 +88,7 @@ def hook():
     #times, today_1 = getNowTimes()
     
     #connect to database
-    #dbh, stmt = connectDB()
+    dbh, stmt = connectDB()
     #sql = "select * from take where appointed_time like " + '"' + today_1 + "%" + '"' + ';'
     #stmt.execute(sql)
     #rows = stmt.fetchall()
