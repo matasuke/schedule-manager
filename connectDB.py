@@ -78,9 +78,9 @@ class usePSQL:
 
         delData = result[n-1]
         place = delData[0]
-        day = delData[1]
-        depart_time = delData[2]
-        appointed_time = delData[3]
+        day = str(delData[1])
+        depart_time = str(delData[2])
+        appointed_time = str(delData[3])
         brings = delData[4]
 
         sql = "delete from appointments where place = '" + place + "' , '" + day + "' , '" + depart_time + "' , '" + appointed_time + "' , '" + brings + "'"
