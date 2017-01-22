@@ -90,7 +90,7 @@ def hook():
     todayHM, todayYMD = getNowTimes()
     
     #connect to database
-    db = usePSQL(settings.host, settings.db, settings.user, settings.password)
+    #db = usePSQL(settings.host, settings.db, settings.user, settings.password)
     
     #fetch datas
     #result = db.getAllAppointment(todayHM, todayYMD)
