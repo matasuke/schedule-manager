@@ -74,9 +74,9 @@ class usePSQL:
     def delAppointment(self, num):
         result = self.getAllDaysAppointments()
 
-        n = int(num) - 1
+        n = int(num)
 
-        delData = result[n]
+        delData = result[n-1]
         place = delData[0]
         day = delData[1]
         depart_time = delData[2]
