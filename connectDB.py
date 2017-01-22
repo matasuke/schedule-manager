@@ -1,6 +1,6 @@
 import psycopg2
 import settings
-
+from defTimes import *
 
 class usePSQL:
 
@@ -46,3 +46,20 @@ class usePSQL:
         result = self.cursor.fetchall()
 
         return result
+
+    def updateAppointments(self, results):
+        place = results[0]
+        day = results[1]
+        depart_time = results[2]
+        appointed_time = results[3]
+        brings = results[4]
+
+        todayHM, todayYMD = getNowTimes()
+
+        if day == "今日":
+            day = todayYMD
+
+        sql = "insert into appointments values(" + place + "," + day + "," + depart_time + "," + appointed_time + "," + brings + ")"
+
+        self.cursor.execute(sql)
+        self.connector.commit()

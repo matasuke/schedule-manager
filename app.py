@@ -137,33 +137,23 @@ def message_text(event):
             TextSendMessage(text=message)
         )
 
-    if "予定を入力" in  event.message.text:
+    if "予定を入力" in  msg:
+        message = "先頭に'予定'と記載の上，以下の順で予定を入力してください!\n\n場所\n日付(e.g: 2017-01-22)\n出発時間(e.g:14:00)\n集合時間(e.g:15:00)\n持ち物" 
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="いつの予定ですか？")
-            )
-
-
-         
-        buttons_template_message = TemplateSendMessage(
-            alt_text='この情報はスマートフォンからのみ観覧できます。',
-            template=ButtonsTemplate(
-                thumbnail_image_url='https://example.com/bot/images/item2.jpg',
-                title='予定を追加？',
-                text='新しい予定を入力しますか？',
-                actions=[
-                    URITemplateAction(
-                        label='入力する',
-                        uri="https://lastiothack.herokuapp.com/"
-                    )
-                ]
-            )
+            TextSendMessage(text=message)
         )
+
+    if ("予定" == msg[:2]) and (len(msg.split("\n")[1:]) == 5):
+        results = msg.split("\n")[1:]
+        db = usePSQL(settings.host, settings.db, settings.user, settings.password)
+        db.updateAppointments(results)
 
         line_bot_api.reply_message(
             event.reply_token,
-            buttons_template_message
+            TextSendMessage(text="予定を更新しました")
         )
+        
 
     #mid = event.source.userId
     line_bot_api.reply_message(
