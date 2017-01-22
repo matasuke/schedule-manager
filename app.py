@@ -163,10 +163,11 @@ def message_text(event):
 
     if "予定を削除" in msg:
 
-        message = "どの予定を削除しますか？\n'1番の予定を削除'のように入力してください"
+        message = "どの予定を削除しますか？\n'1番の予定を削除'のように入力してください\n\n"
         db = usePSQL(settings.host, settings.db, settings.user, settings.password)
-        results = db.getAllDaysAppointments()
-        message += "\n\n" + sendList(results)
+        results = sendList(db.getAllDaysAppointments())
+
+        message += results
         
         line_bot_api.reply_message(
             event.reply_token,
