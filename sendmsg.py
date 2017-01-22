@@ -31,9 +31,9 @@ def sendAllMsg(rows, todayHM):
     for (i,row) in enumerate(rows, start=1):
         messages += "予定" + str(i) + "\n"
         messages += sendMsg(row, todayHM)
-        messages += "\n"
+        messages += "\n\n"
 
-    message = message1 + "\n" + messages
+    message = message1 + "\n\n" + messages
 
     return message
 

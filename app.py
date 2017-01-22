@@ -94,7 +94,7 @@ def hook():
     
     #fetch datas
     result = db.getAllAppointment(todayHM, todayYMD)
-    message = sendAllMsg(result, today)    
+    message = sendAllMsg(result, todayHM)    
     line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text=message))
 
 
