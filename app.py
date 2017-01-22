@@ -126,7 +126,8 @@ def message_text(event):
 
     if "今日の予定" in event.message.text:
         todayHM, todayYMD = getNowTimes()
-        appointments = getAllTodaysAppointments(todayYMD)
+        db = usePSQL(settings.host, settings.db, settings.user, settings.password)
+        appointments = db.getAllTodaysAppointments(todayYMD)
         if appointments == []:
             message = "今日の予定はまだないよ。"
         else:
