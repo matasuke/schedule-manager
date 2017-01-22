@@ -30,6 +30,6 @@ def getNowTimes():
     times.append(hour)
     times.append(minuts)
 
-    today_1 = year + "-" + month + "-" + day
+    todayTMD = year + "-" + month + "-" + day
 
-    return times, today_1
+    return times, todayYMD

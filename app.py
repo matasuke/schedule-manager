@@ -65,26 +65,24 @@ def hook():
 
     #weather information
  
-    r = requests.get(settings.HEART_BEAT + "weather")
-    contents = r.content.decode('utf-8')
+    #r = requests.get(settings.HEART_BEAT + "weather")
+    #contents = r.content.decode('utf-8')
 
-    buttons_template_message = TemplateSendMessage(
-        alt_text='この情報はスマートフォンからのみ観覧できます。',
-        template=ButtonsTemplate(
-            title='天気予報',
-            text= contents[285:319],
-            actions=[
-                URITemplateAction(
-                    label='詳しく!',
-                    uri='http://weather.yahoo.co.jp/weather/jp/13/4410.html'
-                )
-            ]
-        )
-    )
+   # buttons_template_message = TemplateSendMessage(
+   #     alt_text='この情報はスマートフォンからのみ観覧できます。',
+   #     template=ButtonsTemplate(
+   #         title='天気予報',
+   #         text= contents[285:319],
+   #         actions=[
+   #             URITemplateAction(
+   #                 label='詳しく!',
+   #                 uri='http://weather.yahoo.co.jp/weather/jp/13/4410.html'
+   #             )
+   #         ]
+   #     )
+   # )
     
-    line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", buttons_template_message)
-
-    time.sleep(1.0)
+   # line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", buttons_template_message)
 
     #get times
     times, today_1 = getNowTimes()
@@ -134,7 +132,11 @@ def message_text(event):
             TextSendMessage(text="今日はまだ予定ないよ")
         )
 
-    if "予定を入力" == event.message.text:
+    if "予定を入力" in  event.message.text:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="いつの予定ですか？")
+            )
 
 
          
@@ -163,6 +165,7 @@ def message_text(event):
         event.reply_token,
         TextSendMessage(text=response['utt'])
     )
+
 
 
 # it starts when user follow this bot

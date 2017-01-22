@@ -1,6 +1,7 @@
 import sys
 import requests
 from bs4 import BeautifulSoup
+import copy
 
 def Get_Station_info(fro, to, when, time):
     
@@ -41,17 +42,11 @@ def Get_Station_info(fro, to, when, time):
     #get train name
     trains = stations.find_all("li", class_="transport")
     for train in trains:
-        train_names.append(train.text[16:])
+        train_names.append(train.text[16:-2])
+
+    return st_name, t_list, train_names
 
 
-    message1 = st_name[0] +  "から" + st_name[-1] + "への経路"
-    message2 = t_list[0] + "時に" + st_name[0] + "駅からの電車があります。"
-    message3 = st_name[0] + "から" + t_list[0] + "時発の" + train_names[0][:13] + "に乗車して" + st_name[1] + "に向かって下さい。"
-    message4 = t_list[-1] + "時に到着予定です。"
-
-    messages = message1 + "\n" + message2 + "\n" + message3 + "\n" + message4
-
-    return messages
 
 if __name__ == "__main__":
     
@@ -65,5 +60,31 @@ if __name__ == "__main__":
     if argc != 5:
         print("USAGE: python get_statin_name.py [from] [to] [when] [time]")
         print("example python get_statin_name.py 新宿駅 東京駅 20161203 1644")
-    messages = Get_Station_info(fro, to, when, time)
+
+    st_name, t_list, train_names = Get_Station_info(fro, to, when, time)
+    
+    st_name1 = copy.copy(st_name)
+    st_name2 = copy.copy(st_name)
+    t_list1 = copy.copy(t_list)
+    t_list2 = copy.copy(t_list)
+    del st_name1[-1]
+    del st_name2[0]
+    del t_list1[-1]
+    del t_list2[0]
+
+    message1 = "\n" + st_name[0] +  "から" + st_name[-1] + "への経路"
+    message2 = t_list[0] + "時発" + t_list[-1] + "時到着予定\n"
+    message3 = t_list[0] + "時に" + st_name[0] + "駅からの電車があります。"
+    message4 = ""
+    for st,st2, t1, t2, train,c in zip(st_name1 ,st_name2, t_list1, t_list2, train_names, range(0, len(train_names))):
+        if c is 0:
+            message4 += st + "から" + t2 + "の" + train + "に乗車して" + st2 + "に向かってください\n"
+        else:
+            message4 += "次に" + st + "から" + t2 + "発の" + train + "に乗車して" + st2 + "に向かってください\n"
+
+    message5 = t_list[-1] + "時に" + st_name[-1] + "に到着予定です。"
+
+    
+    messages = message1 + "\n" + message2 + "\n" + message3 + "\n" + message4 +  message5
+
     print(messages)
