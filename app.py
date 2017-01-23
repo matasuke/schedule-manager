@@ -92,7 +92,7 @@ def hook():
     db = usePSQL(settings.host, settings.db, settings.user, settings.password)
     
     #fetch datas
-    result = db.getAllAppointments(todayHM, todayYMD)
+    result = db.getAllTodaysAppointments(todayYMD)
     message = sendAllMsg(result, todayHM)    
     line_bot_api.push_message("U41a55a88dcc95a269aacdf0e9c112361", TextSendMessage(text=message))
 
