@@ -31,4 +31,4 @@ def get_movement(th):
         
 
 if __name__ == "__main__":
-    get_movement(50000000);
+    get_movement(40000000);
